@@ -15,3 +15,7 @@ Pair objects, and then extracting the keys and values from them.
 2. PairDemo
 This more advanced class demonstrates how the Pair class may be used to return
 multiple inputs from a user through a method.
+
+3.PairDemo2
+This final class uses a secondary class Employee. Employee objects are created and
+are then used in Pair objects with Strings.
