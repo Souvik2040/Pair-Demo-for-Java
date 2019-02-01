@@ -10,7 +10,7 @@ To exhibit this, I am creating multiple classes within a NetBeans project.
 
 1. PairDemoBasics 
 This demonstrates the basic operations of the Pair class, by creating multiple
-Pair objects, and then extracting the values from them.
+Pair objects, and then extracting the keys and values from them.
 
 2. PairDemo
 This more advanced class demonstrates how the Pair class may be used to return
