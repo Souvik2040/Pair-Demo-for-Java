@@ -3,6 +3,7 @@ package pairsuperclassdemo;
 import java.util.Scanner;
 import java.text.DecimalFormat;
 import javafx.util.Pair;
+import javax.swing.JOptionPane;
 
 public class PairSuperclassDemo {
     
@@ -27,23 +28,31 @@ public class PairSuperclassDemo {
 
     public static void main(String[] args) {
         
-        int num;
+        String message, input;
+        int num, turn = 1;
         
-        displayInfo();
+        message = displayInfo();
+        JOptionPane.showMessageDialog(null, message);
         
-        displayMenuCar(1);
-        num = sc.nextInt();
+        message = displayMenuCar(turn);
+        input = JOptionPane.showInputDialog(message);
+        num = Integer.parseInt(input);
         Cars carRc1 = chooseCar(num);
-        displayMenuBoat(1);
-        num = sc.nextInt();
+        message = displayMenuBoat(turn);
+        input = JOptionPane.showInputDialog(message);
+        num = Integer.parseInt(input);
         Boats boatRc1 = chooseBoat(num);
         Pair<Cars, Boats> racer1 = new Pair<>(carRc1, boatRc1);
         
-        displayMenuCar(2);
-        num = sc.nextInt();
+        turn++;
+        
+        message = displayMenuCar(turn);
+        input = JOptionPane.showInputDialog(message);
+        num = Integer.parseInt(input);
         Cars carRc2 = chooseCar(num);
-        displayMenuBoat(1);
-        num = sc.nextInt();
+        message = displayMenuBoat(turn);
+        input = JOptionPane.showInputDialog(message);
+        num = Integer.parseInt(input);
         Boats boatRc2 = chooseBoat(num);
         Pair<Cars, Boats> racer2 = new Pair<>(carRc2, boatRc2);
         
@@ -53,21 +62,34 @@ public class PairSuperclassDemo {
 
     /* /////////////////// METHODS /////////////////// */
     
-    public static void displayInfo() {
-        System.out.println("You will now simulate a two-legged race between "
+    public static String displayInfo() {
+        String message = ("You will now simulate a two-legged race between "
                 + "two racers." + "\nThe first leg of the race will be a "
                 + "quarter mile drag race between cars of the racers' choice."
                 + "\nThe second leg of the race will be a 20 mile long water "
                 + "drag race between boats of the racers' choice." + "\nFor the"
                 + " second leg, top speed is limited to 20mph for safety.");
+        return message;
     }
     
-    public static void displayMenuCar(int num) {
-        System.out.println("\nChoose a car for Racer " + num + ".");
-        System.out.println("1. BMW M5." 
+    public static String displayMenuCar(int num) {
+        String message;
+        message = ("Choose a car for Racer " + num + "."
+                + "\n1. BMW M5." 
                 + "\n2. Lamborghini Aventador."
-                + "\n3. Dodge Demon.");
-        System.out.println("Press the number corresponding to the chosen car.");
+                + "\n3. Dodge Demon."
+                + "\nPress the number corresponding to the chosen car.");
+        return message;
+    }
+    
+    public static String displayMenuBoat(int num) {
+        String message;
+        message = ("Choose a boat for Racer " + num + "."
+                + "\n1. Go-Fast by Mercury." 
+                + "\n2. Speedtail by Hull Racing."
+                + "\n3. Swashbuckler by AMG."
+                + "\nPress the number corresponding to the chosen boat.");
+        return message;
     }
     
     public static Cars chooseCar(int num) {
@@ -75,8 +97,10 @@ public class PairSuperclassDemo {
         else if (num == 2) return car2;
         else if (num == 3) return car3;
         else {
-            System.out.println("You made an invalid choice.");
-            System.out.println("The M5 is chosen by default.");
+            String message;
+            message = ("You made an invalid choice."
+                    + "\nThe M5 is chosen by default.");
+            JOptionPane.showMessageDialog(null, message);
             return car1;
         }
     }
@@ -86,64 +110,63 @@ public class PairSuperclassDemo {
         else if (num == 2) return boat2;
         else if (num == 3) return boat3;
         else {
-            System.out.println("You made an invalid choice.");
-            System.out.println("The Go-Fast is chosen by default.");
+            String message;
+            message = ("You made an invalid choice."
+                    + "\nThe Go-Fast is chosen by default.");
+            JOptionPane.showMessageDialog(null, message);
             return boat1;
         }
     }
     
-    public static void displayMenuBoat(int num) {
-        System.out.println("\nChoose a boat for Racer " + num + ".");
-        System.out.println("1. Go-Fast by Mercury." 
-                + "\n2. Speedtail by Hull Racing."
-                + "\n3. Swashbuckler by AMG.");
-        System.out.println("Press the number corresponding to the chosen boat.");
-    }
-    
-    public static void displayCar(Cars car, int num) {
-        System.out.println("\nRacer " + num + " chose the '" + car.getName() 
+    public static String displayCar(Cars car, int num) {
+        String message;
+        message = ("Racer " + num + " chose the '" + car.getName() 
                 + "' built by " + car.getMaker() + "." + "\nIt has a "
                 + "top speed of " + car.getTopSpeed() + " mph and is rated at " 
                 + car.getHP() + " horsepowers."
-                + "\nIt has a range of " + car.getRange() + " miles.");
-        System.out.println("Racer " + num + "'s car finished the race in "
+                + "\nIt has a range of " + car.getRange() + " miles."
+                + "\nRacer " + num + "'s car finished the race in "
                 + df.format(car.getTime()) + " seconds." + "\nIt finished"
                 + " with a speed of " + df.format(car.getSpeed())
                 + " mph.");
+        return message;
     }
     
-    public static void displayBoat(Boats boat, int num) {
-        System.out.println("\nRacer " + num + " chose the '" + boat.getName() 
+    public static String displayBoat(Boats boat, int num) {
+        String message;
+        message = ("Racer " + num + " chose the '" + boat.getName() 
                 + "' built by " + boat.getMaker() + "." + "\nIt has a "
                 + "top speed of " + boat.getTopSpeed() 
-                + " mph and is made of " + boat.getMaterial() + ".");
-        System.out.println("Racer " + num + "'s boat finished the race in "
+                + " mph and is made of " + boat.getMaterial() + "."
+                + "\nRacer " + num + "'s boat finished the race in "
                 + df.format(boat.getTime()) + " seconds." + "\nIt finished"
                 + " with a speed of " + df.format(boat.getSpeed())
                 + " mph.");
+        return message;
     }
     
     public static void compare(Pair<Cars, Boats> rc1, Pair<Cars, Boats> rc2) {
-        double tcar1, tcar2, tboat1, tboat2;
-        tcar1 = rc1.getKey().getTime();
-        tcar2 = rc2.getKey().getTime();
-        tboat1 = rc1.getValue().getTime();
-        tboat2 = rc2.getValue().getTime();
-        displayCar(rc1.getKey(), 1);
-        displayCar(rc2.getKey(), 2);
-        displayBoat(rc1.getValue(), 1);
-        displayBoat(rc2.getValue(), 2);
+        String message, msg;
         
-        double trc1 = tcar1 + tboat1;
-        double trc2 = tcar2 + tboat2;
+        msg = displayCar(rc1.getKey(), 1)
+            + "\n\n" + displayCar(rc2.getKey(), 2)
+            + "\n\n" + displayBoat(rc1.getValue(), 1)
+            + "\n\n" + displayBoat(rc2.getValue(), 2);
+
+        JOptionPane.showMessageDialog(null, msg);
         
-        System.out.println("\nRacer 1 took a total of " 
-                + df.format(trc1) + " seconds.");
-        System.out.println("Racer 2 took a total of " 
-                + df.format(trc2) + " seconds.");
+        double trc1 = rc1.getKey().getTime() + rc1.getValue().getTime();
+        double trc2 = rc2.getKey().getTime() + rc2.getValue().getTime();
         
-        if (trc1 < trc2) System.out.println("\nRacer 1 is the winner!");
-        else if (trc1 > trc2) System.out.println("\nRacer 2 is the winner!");
-        else System.out.println("\nThe race was a tie!");
+        message = "Racer 1 took a total of " + df.format(trc1) + " seconds."
+            + "\n\nRacer 2 took a total of " + df.format(trc2) + " seconds.";
+        
+        JOptionPane.showMessageDialog(null, message);
+        
+        if (trc1 < trc2) message = ("\nRacer 1 is the winner!");
+        else if (trc1 > trc2) message = ("\nRacer 2 is the winner!");
+        else message = ("\nThe race was a tie!");
+        
+        JOptionPane.showMessageDialog(null, message);
     }
 }
